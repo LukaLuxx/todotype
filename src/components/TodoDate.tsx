@@ -1,1 +1,4 @@
-export interface TodoDate {}
+export interface TodoDate {
+    created: number;
+    due: number;
+}

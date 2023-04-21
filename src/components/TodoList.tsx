@@ -1,1 +1,4 @@
-export interface TodoList {}
+export interface TodoList {
+    title: string;
+    isCompleted: boolean;
+}

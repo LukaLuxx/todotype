@@ -31,6 +31,7 @@ function App() {
                     <h2>TODOs &darr;</h2>
                     <ul>
                         <li className="blue">
+                            {" "}
                             <b>Task:</b>
                         </li>
                         <li className="red">
@@ -39,6 +40,11 @@ function App() {
                         <li className="green">
                             <b>Due:</b>
                         </li>
+                        <input type="checkbox" id="task1" name="task1" />
+                        <label htmlFor="task1">TODO done</label>
+                        <hr />
+                        <button className="erase-todo">delete</button>
+                        <hr />
                     </ul>
                 </div>
             </div>

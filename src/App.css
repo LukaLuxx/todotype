@@ -60,3 +60,10 @@ li {
     color: green;
     text-decoration: underline green;
 }
+
+.erase-todo {
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: burlywood;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
