@@ -8,14 +8,19 @@
 
 h1 {
     font-size: 30px;
-    color: gray;
+    color: darkgray;
     text-decoration: underline blue;
     position: relative;
     text-align: center;
+    text-shadow: 11px 11px 11px black;
 }
 
 h2 {
     text-decoration: underline;
+}
+
+h3 {
+    text-decoration: underline purple;
 }
 
 .task-wrapper {
@@ -29,6 +34,7 @@ h2 {
     text-align: center;
     background-color: darkgray;
     width: 550px;
+    border: 2px orange solid;
 }
 .task-list > h2 {
     text-align: center;
@@ -48,20 +54,6 @@ li {
     color: green;
 }
 
-.red > b {
-    color: red;
-    text-decoration: underline red;
-}
-.blue > b {
-    color: blue;
-    text-decoration: underline blue;
-}
-
-.green > b {
-    color: green;
-    text-decoration: underline green;
-}
-
 button {
     border-radius: 10px;
     font-size: 20px;
@@ -71,8 +63,28 @@ button {
     text-align: center;
     margin-top: 10px;
 }
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin-left: -25px;
+
+.App {
+    background: cadetblue;
+    height: 100vh;
+}
+
+input {
+    max-width: 100%;
+}
+
+.task-wrapper {
+    max-width: 100%;
+}
+
+/* .form-row {
+    display: flex;
+    flex-direction: column;
+} */
+
+@media (max-width: 587px) {
+    .form-row {
+        display: block;
+        margin-bottom: 10px;
+    }
 }

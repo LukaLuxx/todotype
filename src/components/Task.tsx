@@ -33,8 +33,8 @@ import React from "react";
 export interface TaskProps {
     key: any;
     task: string;
-    deadline: number;
-    created: number;
+    deadline: string;
+    created: string;
     checked: boolean;
     handleCheck: () => void;
     handleDelete: () => void;
@@ -52,8 +52,9 @@ const Task: React.FC<TaskProps> = ({
     return (
         <div>
             <h3 className="blue">{task}</h3>
-            <p className="red">Deadline: {deadline}</p>
             <p className="green">Created: {created}</p>
+            <p className="red">Deadline: {deadline}</p>
+
             <input type="checkbox" checked={checked} onChange={handleCheck} />
             <button onClick={handleDelete}>Delete</button>
         </div>
