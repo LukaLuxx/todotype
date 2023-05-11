@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Pacifico", cursive;
+    font-family: "Roboto", sans-serif;
     font-size: 25px;
 }
 
@@ -11,10 +11,11 @@ h1 {
     color: gray;
     text-decoration: underline blue;
     position: relative;
+    text-align: center;
 }
 
-.todo-text {
-    text-align: center;
+h2 {
+    text-decoration: underline;
 }
 
 .task-wrapper {
@@ -25,9 +26,9 @@ h1 {
 }
 
 .task-list {
-    text-align: left;
+    text-align: center;
     background-color: darkgray;
-    width: 500px;
+    width: 550px;
 }
 .task-list > h2 {
     text-align: center;
@@ -61,9 +62,17 @@ li {
     text-decoration: underline green;
 }
 
-.erase-todo {
+button {
     border-radius: 10px;
     font-size: 20px;
-    background-color: burlywood;
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.submit {
+    text-align: center;
+    margin-top: 10px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin-left: -25px;
 }

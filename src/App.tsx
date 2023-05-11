@@ -1,55 +1,116 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
+import Task from "./components/Task";
 
-function App() {
+interface Item {
+    task: string;
+    deadline: number;
+    created: number;
+    checked: boolean;
+    key: string;
+}
+
+const App: React.FC = () => {
+    const storedItems = localStorage.getItem("todos");
+    const initialItems: Item[] = storedItems ? JSON.parse(storedItems) : [];
+    const [items, setItems] = useState<Item[]>(initialItems);
+    const [newTask, setNewTask] = useState<string>("");
+
+    const handleNewTaskChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        setNewTask(event.target.value);
+    };
+
+    const handleNewTaskSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (newTask.trim() !== "") {
+            const newItem: Item = {
+                task: newTask,
+                deadline: Date.now(),
+                created: Date.now(),
+                checked: false,
+                key: uuidv4(),
+            };
+            setItems([...items, newItem]);
+            setNewTask("");
+        }
+    };
+
+    const handleCheckTask = (index: number) => {
+        const newItems = [...items];
+        newItems[index].checked = !newItems[index].checked;
+        setItems(newItems);
+    };
+
+    const handleDeleteTask = (index: number) => {
+        const newItems = [...items];
+        newItems.splice(index, 1);
+        setItems(newItems);
+    };
+
+    React.useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(items));
+    }, [items]);
+
     return (
         <div className="App">
-            <div className="todo-text">
-                <h1>Taskmaster</h1>
-                <div className="todo-input">
-                    <button className="blue">Task &rarr; </button>
-                    <input type="text" placeholder="Write your task here..." />
-                    <button className="red">Created:</button>
+            <h1>To-Do List</h1>
+            <div className="submit">
+                <form onSubmit={handleNewTaskSubmit}>
                     <input
-                        type="number"
-                        name="created"
-                        id="created"
-                        placeholder="Write your date here..."
+                        type="text"
+                        placeholder="New task"
+                        value={newTask}
+                        onChange={handleNewTaskChange}
                     />
-                    <button className="green">Due date:</button>
-                    <input
-                        type="number"
-                        name="due"
-                        id="due"
-                        placeholder="Write your due date here..."
-                    />
-                </div>
+                    <button type="submit">Add task</button>
+                </form>
             </div>
             <div className="task-wrapper">
-                <div className="task-list">
-                    <h2>TODOs &darr;</h2>
-                    <ul>
-                        <li className="blue">
-                            {" "}
-                            <b>Task:</b>
-                        </li>
-                        <li className="red">
-                            <b>Created:</b>
-                        </li>
-                        <li className="green">
-                            <b>Due:</b>
-                        </li>
-                        <input type="checkbox" id="task1" name="task1" />
-                        <label htmlFor="task1">TODO done</label>
-                        <hr />
-                        <button className="erase-todo">delete</button>
-                        <hr />
-                    </ul>
-                </div>
+                <ul className="task-list">
+                    <h2>Pending</h2>
+                    {items.map((item, index) =>
+                        !item.checked ? (
+                            <li key={item.key}>
+                                <Task
+                                    key={item.key}
+                                    task={item.task}
+                                    deadline={item.deadline}
+                                    created={item.created}
+                                    checked={item.checked}
+                                    handleCheck={() => handleCheckTask(index)}
+                                    handleDelete={() => handleDeleteTask(index)}
+                                    className="green"
+                                />
+                                <hr />
+                            </li>
+                        ) : null
+                    )}
+
+                    <h2>Completed</h2>
+                    {items.map((item, index) =>
+                        item.checked ? (
+                            <li key={item.key}>
+                                <Task
+                                    key={item.key}
+                                    task={item.task}
+                                    deadline={item.deadline}
+                                    created={item.created}
+                                    checked={item.checked}
+                                    handleCheck={() => handleCheckTask(index)}
+                                    handleDelete={() => handleDeleteTask(index)}
+                                    className="green"
+                                />
+                                <hr />
+                            </li>
+                        ) : null
+                    )}
+                </ul>
             </div>
         </div>
     );
-}
+};
 
 export default App;
